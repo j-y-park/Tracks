@@ -3,11 +3,7 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager)
 
 class TracksUserManager(BaseUserManager):
     """A class to manage user creation. May not in fact be necessary."""
-    def create_user(self, email, firstName, lastName, password=None):
-        if get_by_natural_key(email): #email already exists
-            raise ValueError('User with that email address already exists')
-        if password == None: #Add other strength checks later
-            raise ValueError('Bad password!') #perhaps we should use error codes instead?
+    def create_user(self, email, firstName, lastName, confirm, password=None,):
         user = self.model(
             email=self.normalize_email(email),
             firstName=firstName,

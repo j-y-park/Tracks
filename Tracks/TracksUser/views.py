@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from TracksUser.models import TracksUser
 
-# Create your views here.
+def register(email, firstname, lastname, password, confirm):
+    """ """
+    pass
+
+def signIn(email, password):
+    """ """
+    pass
