@@ -6,5 +6,6 @@ from TracksApp import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
-    url(r'^upload_MP3/', views.upload_MP3, name='upload_MP3')
+    url(r'^upload_MP3/', views.upload_MP3, name='upload_MP3'),
+    url(r'^userprofile/', views.userprofile, name='userprofile')
 )

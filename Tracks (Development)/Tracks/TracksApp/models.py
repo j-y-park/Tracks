@@ -10,6 +10,29 @@ class Track(models.Model):
     def __unicode__(self):
         return self.filename
 
+class User(models.Model):
+    username = models.CharField(max_length=200);
+    password = models.CharField(max_length=200);
+
+    def __unicode__(self):
+        return self.username
+
+    def has_userprofile(self):
+        try:
+            self.userprofile
+            return True
+        except:
+            return False
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    field1 = models.CharField(max_length=200)
+    field2 = models.CharField(max_length=200)
+    field3 = models.CharField(max_length=200)
+    field4 = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return "profile of: " + self.user.username
 
 
 def handle_upload_file(f, track, path="..\\Tracks\\TracksApp\\user_mp3_files"):

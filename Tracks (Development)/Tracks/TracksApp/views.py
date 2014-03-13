@@ -16,6 +16,33 @@ def index(request):
     return render(request, 'TracksApp/index.html', {'form': form})
 
 
+def userprofile(request):
+    temp_user = User.objects.get(username="test") #temporary line. FOR TESTING ONLY
+
+    if(User.has_userprofile(temp_user)):
+        temp_instance = temp_user.userprofile
+    else:
+        temp_instance = UserProfile(user=temp_user)
+
+    if (request.method == 'POST'):
+        form = UserProfileForm(request.POST, instance=temp_instance)
+        if(form.is_valid):
+            try:
+                form.save()
+                return HttpResponseRedirect('TracksApp/userprofile.html');
+            except:
+                response = HttpResponse(traceback.format_exc()) # Currently sends a response with the traceback of the error. DO NOT USE IN PRODUCTION.
+                response.status_code = 500;
+                return response
+        else:
+            response = HttpResponse('form not valid')
+            response.status_code = 400;
+            return response
+
+    else:
+        form = UserProfileForm(instance=temp_instance)
+        return render(request, 'TracksApp/userprofile.html', {'form' : form})
+
 
 def upload_MP3(request):
     #print('entered uploadmp3')
